@@ -18,7 +18,7 @@ public class UserInputReader {
 
     private int resetCounter = 0;
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public void readForActivity() {
         printInitialText();
