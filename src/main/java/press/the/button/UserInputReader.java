@@ -8,35 +8,49 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class UserInputReader {
 
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    private int countdown = 10;
+    private static final int DEFAULT_COUNTDOWN_LENGTH = 20;
+
+    private int currentCountdown = 20;
+
+    private String userInput = "";
+
+    private int resetCounter = 0;
 
     private Scanner scanner = new Scanner(System.in);
 
     public void readForActivity() {
+        printInitialText();
+        startCountdown();
 
-        String keyInput = "";
-        while (!keyInput.toLowerCase().equals("lost")) {
-            restartCountdown();
-            printRetryText();
-            keyInput = scanner.nextLine();
-            scheduler.shutdown();
-            countdown = 10;
+        while (!userInput.toLowerCase().equals("lost") && currentCountdown > 0) {
+            if (resetCounter > 0) {
+                printRetryText();
+            }
+            userInput = scanner.nextLine();
+            currentCountdown = DEFAULT_COUNTDOWN_LENGTH;
+            resetCounter++;
         }
-        System.out.println("Correct password. You broke the loop. Good job Hurley, you are free now.");
+        victoryShutdown();
     }
 
-    private void restartCountdown() {
-
+    /**
+     * This will start counting down from the set default time. Every 5 seconds will be printed.
+     * If the countdown is not reset, it will trigger a application shutdown.
+     */
+    private void startCountdown() {
         Runnable runnable = new Runnable() {
 
             public void run() {
 
-                System.out.println(countdown);
-                countdown--;
+                // print every 5 seconds
+                if ((currentCountdown % 5) == 0) {
+                    System.out.println(currentCountdown);
+                }
+                currentCountdown--;
 
-                if (countdown <= 0) {
+                if (currentCountdown <= 0) {
                     universalShutdown();
                 }
             }
@@ -44,15 +58,25 @@ public class UserInputReader {
         scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
     }
 
+    private void printInitialText() {
+        System.out.println("Countdown initiated. Please ENTER the correct password.");
+    }
+
     private void printRetryText() {
-        System.out.println("Wrong password. Countdown reset! ENTER the correct password.");
+        System.out.println("Input: " + userInput + " was the wrong password. Countdown reset! Reset count: " + resetCounter);
+        System.out.println("ENTER the correct password.");
+    }
+
+    private void victoryShutdown() {
+        scheduler.shutdown();
+        scanner.close();
+        System.out.println("Correct password. You broke the loop. Good job Hurley, you are free now.");
     }
 
     private void universalShutdown() {
-        scanner.close();
+        System.out.println("You did not provide any password. Now you will go down together with this island. Too bad Hurley.");
         scheduler.shutdown();
-        System.out.println("You did not save the universe. Too bad Hurley.");
-
+        System.exit(1057);
     }
 
 }
