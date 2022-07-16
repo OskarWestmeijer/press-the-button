@@ -48,10 +48,6 @@ public class UserInputReader {
         System.out.println("Wrong password. Countdown reset! ENTER the correct password.");
     }
 
-    private void printCountdownText() {
-        System.out.println(countdown);
-    }
-
     private void universalShutdown() {
         scanner.close();
         scheduler.shutdown();

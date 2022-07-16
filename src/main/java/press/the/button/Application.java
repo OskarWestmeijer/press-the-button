@@ -1,9 +1,5 @@
 package press.the.button;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Application {
 
