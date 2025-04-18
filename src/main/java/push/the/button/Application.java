@@ -1,6 +1,6 @@
-package press.the.button;
+package push.the.button;
 
-import press.the.button.process.ButtonProcessController;
+import push.the.button.process.ButtonProcessController;
 
 public class Application {
 

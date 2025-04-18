@@ -1,4 +1,4 @@
-package press.the.button.process;
+package push.the.button.process;
 
 final class TerminalWriter {
 

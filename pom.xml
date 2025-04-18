@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>westmeijer.oskar</groupId>
-  <artifactId>press-the-button</artifactId>
+  <artifactId>push-the-button</artifactId>
   <version>1.0</version>
 
   <properties>
@@ -48,7 +48,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>press.the.button.Application</mainClass>
+                <mainClass>push.the.button.Application</mainClass>
               </manifest>
             </archive>
           </configuration>

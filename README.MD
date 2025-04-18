@@ -1,4 +1,4 @@
-# press-the-button
+# push-the-button
 
 The only way to stop the countdown, is by providing the correct password. Hopefully you can end the madness.
 
@@ -8,5 +8,5 @@ Java 21 has to be installed.
 
 ```
 ./mvnw clean compile package
-java -jar target/press-the-button-1.0.jar
+java -jar target/push-the-button-1.0.jar
 ```

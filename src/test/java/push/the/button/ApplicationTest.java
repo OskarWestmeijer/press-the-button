@@ -1,4 +1,4 @@
-package press.the.button;
+package push.the.button;
 
 import org.junit.jupiter.api.Test;
 
