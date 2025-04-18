@@ -6,7 +6,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ButtonProcessController {
+public final class ButtonProcessController {
 
   private static ButtonProcessController INSTANCE;
   private final Countdown countdown = Countdown.getInstance();
@@ -43,7 +43,8 @@ public class ButtonProcessController {
       }
     } catch (Exception e) {
       System.out.println("Exception thrown." + e);
-      throw e;
+      TerminalWriter.printFailure();
+      shutdownProcess();
     }
   }
 

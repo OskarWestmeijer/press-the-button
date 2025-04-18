@@ -1,6 +1,6 @@
 package press.the.button.process;
 
-class TerminalWriter {
+final class TerminalWriter {
 
   static void printInstructions() {
     System.out.println("Countdown initiated. ENTER the correct password. For hints enter: '1', '2'");
